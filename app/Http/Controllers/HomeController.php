@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
-
+use App\Models\TankReport;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index');
+        $tanks = TankReport::where('created_at', 'like', date('Y-m-d') . '%')
+            ->get();
+        // dd($tanks);
+        return view('home.index', [
+
+            'tanks' => $tanks,
+        ]);
     }
 }

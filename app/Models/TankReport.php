@@ -15,4 +15,9 @@ class TankReport extends Model
     {
         return $this->belongsTo(Tank::class, 'id_tank', 'id');
     }
+
+    public function getTankNameAttribute()
+    {
+        return $this->tank->name;
+    }
 }
