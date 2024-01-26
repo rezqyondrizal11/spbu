@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [UserController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [UserController::class, 'edit'])->name('edit');
         Route::put('update', [UserController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix' => '/tankgrade', 'as' => 'tankgrade.'], function () {
@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TankgradeController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [TankgradeController::class, 'edit'])->name('edit');
         Route::put('update', [TankgradeController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [TankgradeController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [TankgradeController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/tanktype', 'as' => 'tanktype.'], function () {
         Route::get('/', [TanktypeController::class, 'index'])->name('index');
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TanktypeController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [TanktypeController::class, 'edit'])->name('edit');
         Route::put('update', [TanktypeController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [TanktypeController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [TanktypeController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/tank', 'as' => 'tank.'], function () {
         Route::get('/', [TankController::class, 'index'])->name('index');
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TankController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [TankController::class, 'edit'])->name('edit');
         Route::put('update', [TankController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [TankController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [TankController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/supplier', 'as' => 'supplier.'], function () {
         Route::get('/', [SupplierController::class, 'index'])->name('index');
@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [SupplierController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [SupplierController::class, 'edit'])->name('edit');
         Route::put('update', [SupplierController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [SupplierController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [SupplierController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/supply', 'as' => 'supply.'], function () {
         Route::get('/', [SupplyController::class, 'index'])->name('index');
@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [SupplyController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [SupplyController::class, 'edit'])->name('edit');
         Route::put('update', [SupplyController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [SupplyController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [SupplyController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix' => '/isi-tank', 'as' => 'tankreport.'], function () {
@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TankreportController::class, 'store'])->name('store');
         // Route::get('edit/{id}/', [TankreportController::class, 'edit'])->name('edit');
         // Route::put('update', [TankreportController::class, 'update'])->name('update');
-        // Route::delete('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');
+        // Route::get('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/sales-report', 'as' => 'salesreport.'], function () {
         Route::get('/', [SalesreportController::class, 'index'])->name('index');
@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [SalesreportController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [SalesreportController::class, 'edit'])->name('edit');
         Route::put('update', [SalesreportController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [SalesreportController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [SalesreportController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix' => '/tank-delivery', 'as' => 'tankdelivery.'], function () {
@@ -94,6 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TankdeliveryController::class, 'store'])->name('store');
         Route::get('edit/{id}/', [TankdeliveryController::class, 'edit'])->name('edit');
         Route::put('update', [TankdeliveryController::class, 'update'])->name('update');
-        Route::delete('/destroy/{id}', [TankdeliveryController::class, 'destroy'])->name('destroy');
+        Route::get('/destroy/{id}', [TankdeliveryController::class, 'destroy'])->name('destroy');
     });
 });

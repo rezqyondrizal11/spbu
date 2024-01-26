@@ -32,7 +32,7 @@ class SupplierController extends Controller
         $data = Supplier::create($input);
 
 
-        return redirect()->route('Supplier.index')
+        return redirect()->route('supplier.index')
             ->with('success', 'Tank Grade created successfully');
     }
 
@@ -51,14 +51,14 @@ class SupplierController extends Controller
         $input = $request->all();
         $data = Supplier::find($request->id);
         $data->update($input);
-        return redirect()->route('Supplier.index')
+        return redirect()->route('supplier.index')
             ->with('success', 'Tank Grade updated successfully');
     }
 
     public function destroy($id)
     {
         Supplier::find($id)->delete();
-        return redirect()->route('Supplier.index')
+        return redirect()->route('supplier.index')
             ->with('success', 'Tank Grade deleted successfully');
     }
 }
