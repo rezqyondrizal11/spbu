@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
 
-    Route::group(['prefix' => '/tankgrade', 'as' => 'tankgrade.'], function () {
+    Route::group(['prefix' => '/product-price', 'as' => 'tankgrade.'], function () {
         Route::get('/', [TankgradeController::class, 'index'])->name('index');
         Route::get('/create', [TankgradeController::class, 'create'])->name('create');
         Route::post('/store', [TankgradeController::class, 'store'])->name('store');

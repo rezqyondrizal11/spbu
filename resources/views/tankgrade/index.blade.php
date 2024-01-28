@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Tank Grade')
+@section('title', 'Product Price')
 
 @section('content')
     <div class="container-fluid py-4">

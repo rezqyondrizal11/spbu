@@ -44,7 +44,7 @@
                                                     </div>
                                                     <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                         <div class="input-group input-group-static">
-                                                            <label for="id_grade" class="ms-0">Grade
+                                                            <label for="id_grade" class="ms-0">Product Price
                                                             </label>
                                                             <select class="form-control" id="id_grade" name="id_grade"
                                                                 required>
@@ -52,7 +52,7 @@
                                                                     Grade</option>
                                                                 @foreach ($grade as $g)
                                                                     <option value="{{ $g->id }}">
-                                                                        {{ $g->name }}
+                                                                        {{ $g->name }} - {{ $g->harga }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
@@ -76,6 +76,17 @@
                                                     </div>
                                                     <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                         <div class="input-group input-group-static ">
+                                                            <label class="ms-0">Capacity</label>
+                                                            <input
+                                                                class="form-control @error('capacity') is-invalid @enderror"
+                                                                name="capacity" id="capacity" type="number"
+                                                                onfocus="focused(this)" onfocusout="defocused(this)"
+                                                                required>
+                                                            @error('desc')
+                                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        {{-- <div class="input-group input-group-static ">
                                                             <label class="ms-0">Description</label>
 
                                                             <textarea class="form-control @error('desc') is-invalid @enderror" name="desc" id="desc" onfocus="focused(this)"
@@ -84,12 +95,12 @@
                                                             @error('desc')
                                                                 <span class="invalid-feedback">{{ $message }}</span>
                                                             @enderror
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-12 col-sm-6">
-                                                        <div class="input-group input-group-static">
+                                                {{-- <div class="row mt-3">
+                                                    <div class="col-12 col-sm-6"> --}}
+                                                {{-- <div class="input-group input-group-static">
                                                             <label class="ms-0">Physical Label</label>
 
                                                             <input class="form-control @error('label') is-invalid @enderror"
@@ -98,9 +109,9 @@
                                                             @error('label')
                                                                 <span class="invalid-feedback">{{ $message }}</span>
                                                             @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                        </div> --}}
+                                                {{-- </div> --}}
+                                                {{-- <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                         <div class="input-group input-group-static ">
                                                             <label class="ms-0">Capacity</label>
                                                             <input
@@ -113,7 +124,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="row mt-3">
                                                     <div class="col-12 col-sm-6">
                                                         <div class="input-group input-group-static">
@@ -129,7 +140,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                    {{-- <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                         <div class="input-group input-group-static ">
                                                             <label class="ms-0">Tank Type</label>
                                                             <select class="form-control" id="id_type" name="id_type"
@@ -143,7 +154,7 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <div class="button-row d-flex mt-4">
                                                     <button class="btn bg-gradient-primary ms-auto mb-0" type="submit"

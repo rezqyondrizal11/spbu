@@ -132,7 +132,7 @@
                                                     </div>
                                                     <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                         <div class="input-group input-group-static">
-                                                            <label class="ms-0">Supplier / Company</label>
+                                                            <label class="ms-0"> Supply Point Name</label>
                                                             <select class="form-control" id="id_supply" name="id_supply"
                                                                 required>
                                                                 <option value="" disabled selected hidden>Select a

@@ -29,18 +29,12 @@
                                         <th
                                             class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             name</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Grade</th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Number</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Description</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Physical Label</th>
+
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Capacity
@@ -48,9 +42,7 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Diameter</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Tank Type</th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Action</th>
@@ -62,13 +54,11 @@
                                         <tr>
                                             <td class="align-middle text-center">{{ $loop->iteration }}</td>
                                             <td class="align-middle text-center">{{ $row->name }}</td>
-                                            <td class="align-middle text-center">{{ $row->grade->name }}</td>
+
                                             <td class="align-middle text-center">{{ $row->number }}</td>
-                                            <td class="align-middle text-center">{{ $row->desc }}</td>
-                                            <td class="align-middle text-center">{{ $row->label }}</td>
+
                                             <td class="align-middle text-center">{{ $row->capacity }}</td>
                                             <td class="align-middle text-center">{{ $row->diameter }}</td>
-                                            <td class="align-middle text-center">{{ $row->type->name }}</td>
 
                                             <td class="align-middle text-center">
                                                 <a href="{{ route('tank.edit', ['id' => $row->id]) }}"

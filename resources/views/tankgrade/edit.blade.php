@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Edit Tank Grade')
+@section('title', 'Edit Product Price')
 
 @section('content')
     <div class="container-fluid py-4">
@@ -29,7 +29,7 @@
                                         @method('PUT')
                                         <div class="border-radius-xl bg-white js-active" data-animation="FadeIn">
                                             <h5 class="font-weight-bolder mb-0">@yield('title')</h5>
-                                            <p class="mb-0 text-sm">Tank Grade informations</p>
+                                            <p class="mb-0 text-sm">Product Priceinformations</p>
                                             <div class="multisteps-form__content">
                                                 <div class="row mt-3">
                                                     <div class="col-12 col-sm-6">
