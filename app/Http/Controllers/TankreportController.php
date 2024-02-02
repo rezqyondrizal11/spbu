@@ -19,7 +19,19 @@ class TankreportController extends Controller
     }
     public function report(Request $request)
     {
-        $data = TankReport::orderBy('id', 'DESC')->get();
+        $query = TankReport::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
+
 
         return view('tankreport.index2', compact('data'));
     }

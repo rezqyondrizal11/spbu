@@ -20,7 +20,18 @@ class SalesreportController extends Controller
     }
     public function report(Request $request)
     {
-        $data = SalesReport::orderBy('id', 'DESC')->get();
+        $query = SalesReport::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
 
         return view('salesreport.index2', compact('data'));
     }
