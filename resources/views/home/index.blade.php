@@ -2,10 +2,33 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    <style>
+        /* Gaya CSS untuk custom-badge-label */
+        .custom-badge-label {
+            display: inline-block;
+            padding: 5px;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Coverage Day Summary</h5>
+                <div class=" mt-2">
+                    <div class="row col-2">
+                        <span class="custom-badge-label text-center" style="background-color: rgba(54, 162, 235, 0.8);">
+                            CAPACITY</span>
+                    </div>
+                    <div class="row col-2">
+                        <span class="custom-badge-label text-center"
+                            style="background-color: rgba(255, 99, 132, 0.8);">CURRENT
+                            CAPACITY</span>
+                    </div>
+
+                </div>
             </div>
             <div class="card-body">
 
@@ -19,6 +42,8 @@
                                     </div>
 
                                     <canvas id="tankChart_{{ $loop->index }}"></canvas>
+
+
                                 </div>
                             </div>
                         @endforeach
@@ -44,7 +69,8 @@
         tankData.forEach(function(tank, index) {
             var sisaKapasitas = tank.kapasitas_stok;
             var persentase = (sisaKapasitas / tank.tank.capacity) * 100;
-
+            var formattedStok = tank.kapasitas_stok.toLocaleString();
+            var formattedCapacity = tank.tank.capacity.toLocaleString();
             // Konfigurasi chart untuk masing-masing tank
             var config = {
                 type: 'doughnut',
@@ -68,7 +94,7 @@
                         },
                         title: {
                             display: true,
-                            text: tank.tank.capacity + ' / ' + tank.kapasitas_stok
+                            text: formattedStok + 'L / ' + formattedCapacity + 'L'
                         },
                         // subtitle: {
                         //     display: true,

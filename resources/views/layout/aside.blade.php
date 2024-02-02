@@ -45,6 +45,15 @@
                     <span class="nav-link-text ms-1">Tank On Delivery</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $currentRoute == 'tankreport.report' ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('tankreport.report') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
+                </a>
+            </li>
             <?php }?>
             <?php if (Auth::user()->roles == 'operator') { ?>
             <li class="nav-item mt-3">
@@ -62,6 +71,15 @@
             </li>
             <?php }?>
             <?php if (Auth::user()->roles == 'admin') { ?>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $currentRoute == 'tankreport.report' ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('tankreport.report') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master Data
                 </h6>
@@ -92,7 +110,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Tank Grade</span>
+                    <span class="nav-link-text ms-1">Product Price</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -122,9 +140,6 @@
                     <span class="nav-link-text ms-1">User</span>
                 </a>
             </li>
-            <?php } elseif (Auth::user()->roles == 'pengawas') { ?>
-
-            <?php  } elseif (Auth::user()->roles == 'operator') { ?>
             <?php } ?>
 
 

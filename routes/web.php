@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [TankreportController::class, 'index'])->name('index');
         Route::get('/create', [TankreportController::class, 'create'])->name('create');
         Route::post('/store', [TankreportController::class, 'store'])->name('store');
+        Route::get('/report', [TankreportController::class, 'report'])->name('report');
+
         // Route::get('edit/{id}/', [TankreportController::class, 'edit'])->name('edit');
         // Route::put('update', [TankreportController::class, 'update'])->name('update');
         // Route::get('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');

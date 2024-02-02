@@ -17,6 +17,12 @@ class TankreportController extends Controller
 
         return view('tankreport.index', compact('data'));
     }
+    public function report(Request $request)
+    {
+        $data = TankReport::orderBy('id', 'DESC')->get();
+
+        return view('tankreport.index2', compact('data'));
+    }
     public function create()
     {
         $tankreport = TankReport::where('created_at', 'like', date('Y-m-d') . '%')->orderBy('id', 'ASC')->get();
