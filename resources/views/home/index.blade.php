@@ -19,12 +19,12 @@
                 <h5 class="card-title">Coverage Day Summary</h5>
                 <div class=" mt-2">
                     <div class="row col-2">
-                        <span class="custom-badge-label text-center" style="background-color: rgba(54, 162, 235, 0.8);">
+                        <span class="custom-badge-label text-center" style="background-color:  rgba(255, 99, 132, 0.8);">
                             CAPACITY</span>
                     </div>
                     <div class="row col-2">
                         <span class="custom-badge-label text-center"
-                            style="background-color: rgba(255, 99, 132, 0.8);">CURRENT
+                            style="background-color:rgba(54, 162, 235, 0.8);">CURRENT
                             CAPACITY</span>
                     </div>
 
@@ -71,19 +71,22 @@
             var persentase = (sisaKapasitas / tank.tank.capacity) * 100;
             var formattedStok = tank.kapasitas_stok.toLocaleString();
             var formattedCapacity = tank.tank.capacity.toLocaleString();
+            var persentaseStok = (tank.kapasitas_stok / tank.tank.capacity) * 100;
+            var persentaseCapacity = 100 - persentaseStok; // Menambahkan persentase kapasitas
+
             // Konfigurasi chart untuk masing-masing tank
             var config = {
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: [tank.kapasitas_stok, tank.tank.capacity],
+                        data: [tank.tank.capacity, tank.kapasitas_stok],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.8)',
                             'rgba(54, 162, 235, 0.8)',
                         ],
                         hoverOffset: 4
                     }],
-                    labels: [persentase.toFixed(2) + '%', '']
+                    labels: [persentase.toFixed(2) + '%', persentaseCapacity.toFixed(2) + '%']
                 },
                 options: {
                     responsive: true,
