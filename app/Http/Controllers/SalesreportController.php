@@ -18,6 +18,12 @@ class SalesreportController extends Controller
 
         return view('salesreport.index', compact('data'));
     }
+    public function report(Request $request)
+    {
+        $data = SalesReport::orderBy('id', 'DESC')->get();
+
+        return view('salesreport.index2', compact('data'));
+    }
     public function create()
     {
         $tank = TankReport::where('created_at', 'like', date('Y-m-d') . '%')->orderBy('id', 'ASC')->get();

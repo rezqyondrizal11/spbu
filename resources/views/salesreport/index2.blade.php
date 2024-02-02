@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Report Liters')
+@section('title', 'Report Sales')
 
 @section('content')
     <div class="container-fluid py-4">
@@ -23,22 +23,29 @@
                                         <th
                                             class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             No</th>
-
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Created By
+                                        </th>
+                                        <th
+                                            class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Time</th>
                                         <th
                                             class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             name</th>
 
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Capacity
+                                            Liters sold
+                                        </th>
+
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Price
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Start Capacity
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Current Capacity
+                                            Revenue
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -48,16 +55,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $total = 0;
+                                    @endphp
                                     @foreach ($data as $row)
+                                        @php
+                                            $total += $row->harga * $row->kapasitas;
+                                        @endphp
                                         <tr>
                                             <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                                            <td class="align-middle text-center">{{ $row->tank->name }}</td>
-                                            <td class="align-middle text-center">{{ $row->tank->capacity }}</td>
-                                            <td class="align-middle text-center">{{ $row->kapasitas_awal }}</td>
-                                            <td class="align-middle text-center">{{ $row->kapasitas_stok }}</td>
+                                            <td class="align-middle text-center">{{ $row->user->name }}</td>
+                                            <td class="align-middle text-center">
+                                                {{ $row->jam_awal . ' - ' . $row->jam_akhir }}</td>
+
+                                            <td class="align-middle text-center">{{ $row->tankreport->tank->name }}</td>
+
+                                            <td class="align-middle text-center">{{ number_format($row->kapasitas) }}</td>
+                                            <td class="align-middle text-center">{{ number_format($row->harga) }}</td>
+                                            <td class="align-middle text-center">
+                                                {{ number_format($row->harga * $row->kapasitas) }}</td>
+
                                             <td class="align-middle text-center">
                                                 {{ date('d-M-Y', strtotime($row->created_at)) }}</td>
-
 
 
                                         </tr>
@@ -65,6 +84,18 @@
 
 
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="align-middle text-center">Total Revenue :</td>
+                                        <td class="align-middle text-center">{{ number_format($total) }}</td>
+
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

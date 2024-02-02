@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}/', [SalesreportController::class, 'edit'])->name('edit');
         Route::put('update', [SalesreportController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [SalesreportController::class, 'destroy'])->name('destroy');
+        Route::get('/report', [SalesreportController::class, 'report'])->name('report');
     });
 
     Route::group(['prefix' => '/tank-delivery', 'as' => 'tankdelivery.'], function () {
