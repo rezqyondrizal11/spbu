@@ -42,7 +42,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Tank On Delivery</span>
+                    <span class="nav-link-text ms-1">Tank Order Delivery</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -52,6 +52,15 @@
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
                     <span class="nav-link-text ms-1">Report Liters</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $currentRoute == 'tankdelivery.report' ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('tankdelivery.report') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report Tank Order Delivery</span>
                 </a>
             </li>
             <?php }?>
@@ -96,6 +105,15 @@
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
                     <span class="nav-link-text ms-1">Report Sales</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $currentRoute == 'tankdelivery.report' ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('tankdelivery.report') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report Tank Order Delivery</span>
                 </a>
             </li>
             <li class="nav-item mt-3">

@@ -19,6 +19,23 @@ class TankdeliveryController extends Controller
 
         return view('Tankdelivery.index', compact('data'));
     }
+    public function report(Request $request)
+    {
+        $query = Tankdelivery::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
+
+        return view('Tankdelivery.index2', compact('data'));
+    }
     public function create()
     {
         $tank = Tank::get();
