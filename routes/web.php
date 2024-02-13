@@ -77,9 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [TankreportController::class, 'store'])->name('store');
         Route::get('/report', [TankreportController::class, 'report'])->name('report');
 
-        // Route::get('edit/{id}/', [TankreportController::class, 'edit'])->name('edit');
-        // Route::put('update', [TankreportController::class, 'update'])->name('update');
-        // Route::get('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');
+        Route::get('edit/{id}/', [TankreportController::class, 'edit'])->name('edit');
+        Route::put('update', [TankreportController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => '/sales-report', 'as' => 'salesreport.'], function () {
         Route::get('/', [SalesreportController::class, 'index'])->name('index');

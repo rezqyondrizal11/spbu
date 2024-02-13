@@ -1,7 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Edit Tank Grade')
-
+@section('title', 'Ubah Isi Tank')
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
@@ -23,44 +22,50 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <form method="POST" action="{{ route('tankgrade.update') }}" style="height: 281px;">
+                                    <form method="POST" action="{{ route('tankreport.update') }}" style="height: 281px;">
 
                                         @csrf
                                         @method('PUT')
+                                        <input type="hidden" value="{{ $data->id }}" name="id">
+
                                         <div class="border-radius-xl bg-white js-active" data-animation="FadeIn">
                                             <h5 class="font-weight-bolder mb-0">@yield('title')</h5>
-                                            <p class="mb-0 text-sm">Tank Grade informations</p>
+                                            <p class="mb-0 text-sm">Isi</p>
                                             <div class="multisteps-form__content">
                                                 <div class="row mt-3">
                                                     <div class="col-12 col-sm-6">
-                                                        <div class="input-group input-group-static">
-                                                            <label class="ms-0">Nama</label>
-                                                            <input class="form-control @error('name') is-invalid @enderror"
-                                                                name="name" id="name" value="{{ $data->name }}"
-                                                                type="text" onfocus="focused(this)"
-                                                                onfocusout="defocused(this)" required>
-                                                            @error('name')
-                                                                <span class="invalid-feedback">{{ $message }}</span>
-                                                            @enderror
-
+                                                        <div class="input-group input-group-static ">
+                                                            <label class="ms-0">Tank Name</label>
+                                                            <select class="form-control" id="id_tank" name="id_tank"
+                                                                required>
+                                                                <option value="" disabled selected hidden>Select a
+                                                                    Tank Name</option>
+                                                                @foreach ($tank as $t)
+                                                                    <option value="{{ $t->id }}"
+                                                                        <?= $data->id_tank == $t->id ? 'selected' : '' ?>>
+                                                                        {{ $t->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                                        <div class="input-group input-group-dynamic">
-                                                            <label class="form-label">Harga</label>
-                                                            <input class="form-control @error('harga') is-invalid @enderror"
-                                                                name="mt-3 mt-sm-0" id="mt-3 mt-sm-0"
-                                                                value="{{ old('mt-3 mt-sm-0') }}" type="number"
+                                                        <div class="input-group input-group-static">
+                                                            <label class="">Capacity Today</label>
+                                                            <input
+                                                                class="form-control @error('kapasitas_awal') is-invalid @enderror"
+                                                                name="kapasitas_awal" id="kapasitas_awal"
+                                                                value="{{ $data->kapasitas_awal }}" type="number"
                                                                 onfocus="focused(this)" onfocusout="defocused(this)"
-                                                                value="{{ $data->harga }}" required>
-                                                            @error('mt-3 mt-sm-0')
+                                                                required>
+                                                            @error('kapasitas_awal')
                                                                 <span class="invalid-feedback">{{ $message }}</span>
                                                             @enderror
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" value="{{ $data->id }}" name="id">
+
                                                 <div class="button-row d-flex mt-4">
                                                     <button class="btn bg-gradient-primary ms-auto mb-0" type="submit"
                                                         title="Save">Save</button>

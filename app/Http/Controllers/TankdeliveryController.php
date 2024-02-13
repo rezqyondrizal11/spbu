@@ -77,29 +77,47 @@ class TankdeliveryController extends Controller
             ->with('success', ' tank berhasil di isi ');
     }
 
-    // public function edit($id)
-    // {
-    //     $data = Supplier::find($id);
-    //     return view('Supplier.edit', compact('data'));
-    // }
+    public function edit($id)
+    {
+        $tank = Tank::get();
+        $supplier = Supplier::get();
+        $supply    = Supply::get();
+        $data = Tankdelivery::find($id);
+        return view('Tankdelivery.edit', compact('data', 'tank', 'supplier', 'supply'));
+    }
 
 
-    // public function update(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required',
-    //     ]);
-    //     $input = $request->all();
-    //     $data = Supplier::find($request->id);
-    //     $data->update($input);
-    //     return redirect()->route('Supplier.index')
-    //         ->with('success', 'Tank Grade updated successfully');
-    // }
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'do_volume' => 'required',
+            'id_tank' => 'required',
+            'id_don' => 'required',
+            'driver' => 'required',
+            'vehicle_number' => 'required',
+            'id_supplier' => 'required',
+            'id_supply' => 'required',
+        ]);
+        $input = $request->all();
+        $data = Tankdelivery::find($request->id);
+        $data->update($input);
 
-    // public function destroy($id)
-    // {
-    //     Supplier::find($id)->delete();
-    //     return redirect()->route('Supplier.index')
-    //         ->with('success', 'Tank Grade deleted successfully');
-    // }
+        $tank = Tank::where('id', $input['id_tank'])->first();
+        $tankreport = TankReport::where('id_tank', $tank->id)
+            ->where('created_at', 'like', date('Y-m-d') . '%')
+            ->first();
+        $tankreport->kapasitas_stok = $tankreport->kapasitas_stok - $request->do_volume_lama + $data->do_volume;
+        $tankreport->save();
+
+        return redirect()->route('tankdelivery.index')
+            ->with('success', 'updated successfully');
+    }
+
+    public function destroy($id)
+    {
+
+        Tankdelivery::find($id)->delete();
+        return redirect()->route('tankdelivery.index')
+            ->with('success', ' deleted successfully');
+    }
 }

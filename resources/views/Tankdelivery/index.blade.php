@@ -60,7 +60,9 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Created By
                                         </th>
-
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Action</th>
                                         {{-- <th class="text-secondary opacity-7"></th> --}}
                                     </tr>
                                 </thead>
@@ -77,6 +79,17 @@
                                             <td class="align-middle text-center">{{ $row->tank->name }}</td>
                                             <td class="align-middle text-center">{{ $row->do_volume }}</td>
                                             <td class="align-middle text-center">{{ $row->user->name }}</td>
+
+                                            <td class="align-middle text-center">
+                                                <a href="{{ route('tankdelivery.edit', ['id' => $row->id]) }}"
+                                                    class="btn btn-warning btn-sm">
+                                                    Update
+                                                </a>
+                                                <a href="{{ route('tankdelivery.destroy', ['id' => $row->id]) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    Delete
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
 

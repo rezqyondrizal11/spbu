@@ -50,7 +50,9 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Revenue
                                         </th>
-
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Action</th>
                                         {{-- <th class="text-secondary opacity-7"></th> --}}
                                     </tr>
                                 </thead>
@@ -75,7 +77,16 @@
                                             <td class="align-middle text-center">
                                                 {{ number_format($row->harga * $row->kapasitas) }}</td>
 
-
+                                            <td class="align-middle text-center">
+                                                <a href="{{ route('salesreport.edit', ['id' => $row->id]) }}"
+                                                    class="btn btn-warning btn-sm">
+                                                    Update
+                                                </a>
+                                                <a href="{{ route('salesreport.destroy', ['id' => $row->id]) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    Delete
+                                                </a>
+                                            </td>
 
 
                                         </tr>

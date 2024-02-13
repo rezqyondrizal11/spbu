@@ -43,7 +43,9 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Current Capacity
                                         </th>
-                                        {{-- <th class="text-secondary opacity-7"></th> --}}
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,6 +57,16 @@
                                             <td class="align-middle text-center">{{ $row->kapasitas_awal }}</td>
                                             <td class="align-middle text-center">{{ $row->kapasitas_stok }}</td>
 
+                                            <td class="align-middle text-center">
+                                                <a href="{{ route('tankreport.edit', ['id' => $row->id]) }}"
+                                                    class="btn btn-warning btn-sm">
+                                                    Update
+                                                </a>
+                                                <a href="{{ route('tankreport.destroy', ['id' => $row->id]) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    Delete
+                                                </a>
+                                            </td>
 
 
                                         </tr>
