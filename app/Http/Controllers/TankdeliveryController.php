@@ -36,14 +36,34 @@ class TankdeliveryController extends Controller
 
         return view('Tankdelivery.index2', compact('data'));
     }
+
+    public function print(Request $request)
+    {
+        $query = Tankdelivery::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
+
+        return view('Tankdelivery.print', compact('data'));
+    }
     public function create()
     {
         $tank = Tank::get();
 
         $supplier = Supplier::get();
         $supply    = Supply::get();
-        // $tank = Tank::whereNotIn('id', $tankreport->pluck('id_tank'))->get();
-        return view('Tankdelivery.create', compact('tank', 'supplier', 'supply'));
+        $tanks = TankReport::where('created_at', 'like', date('Y-m-d') . '%')
+        ->get();
+     
+        return view('Tankdelivery.create', compact('tank', 'supplier', 'supply','tanks'));
     }
 
     public function store(Request $request)
@@ -58,16 +78,25 @@ class TankdeliveryController extends Controller
             'id_supplier' => 'required',
             'id_supply' => 'required',
         ]);
-
         $input = $request->all();
+
+        $tank = Tank::where('id', $input['id_tank'])->first();
+
+        $tankreport = TankReport::where('id_tank', $tank->id)
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        ->first();
+        $checkstok =  $input['do_volume'] +  $tankreport->kapasitas_stok;
+        if ($checkstok  >   $tankreport->kapasitas_awal) {
+
+            return redirect()->route('tankdelivery.create')
+            ->with('error', 'Melebihi Kapasitas Maximum Tank');
+        }
+
         $input['created_by'] = Auth::user()->id;
         $data = Tankdelivery::create($input);
 
 
-        $tank = Tank::where('id', $input['id_tank'])->first();
-        $tankreport = TankReport::where('id_tank', $tank->id)
-            ->where('created_at', 'like', date('Y-m-d') . '%')
-            ->first();
+      
         $tankreport->kapasitas_stok =  $tankreport->kapasitas_stok + $data->do_volume;
         $tankreport->save();
 
@@ -83,7 +112,10 @@ class TankdeliveryController extends Controller
         $supplier = Supplier::get();
         $supply    = Supply::get();
         $data = Tankdelivery::find($id);
-        return view('Tankdelivery.edit', compact('data', 'tank', 'supplier', 'supply'));
+        $tanks = TankReport::where('created_at', 'like', date('Y-m-d') . '%')
+        ->get();
+     
+        return view('Tankdelivery.edit', compact('data', 'tank', 'supplier', 'supply','tanks'));
     }
 
 

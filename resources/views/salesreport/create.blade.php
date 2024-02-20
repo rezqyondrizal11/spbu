@@ -21,7 +21,11 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-
+                                    @if(session('error'))
+                                        <div class="alert alert-danger text-white">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                     <form method="POST" action="{{ route('salesreport.store') }}" style="height: 281px;">
                                         @csrf
                                         <div class="border-radius-xl bg-white js-active" data-animation="FadeIn">
@@ -37,7 +41,7 @@
                                                                 <option value="" disabled selected hidden>Select a
                                                                     Tank Name</option>
                                                                 @foreach ($tank as $t)
-                                                                    <option value="{{ $t->id }}">
+                                                                    <option value="{{ $t->id }}"  data-stok-max="{{ $t->capacity }}">
                                                                         {{ $t->tank->name }}
                                                                     </option>
                                                                 @endforeach
@@ -69,16 +73,11 @@
                                                                 <option value="" disabled selected hidden>Select a
                                                                     shift</option>
 
-                                                                <option value="pagi">
-                                                                    Pagi
-                                                                </option>
-                                                                <option value="siang">
-                                                                    Siang
-                                                                </option>
-                                                                <option value="malam">
-                                                                    Malam
-                                                                </option>
-
+                                                            @foreach($shift as $s)
+                                                            <option value="{{ $s }}" >
+                                                                        {{ $s }}
+                                                                    </option>
+                                                            @endforeach
                                                             </select>
 
                                                         </div>
@@ -105,3 +104,15 @@
 
     </div>
 @endsection
+<script>
+       document.addEventListener("DOMContentLoaded", function() {
+        var tankSelect = document.getElementById("id_tank");
+        var kapasitasInput = document.getElementById("kapasitas_awal");
+
+        tankSelect.addEventListener("change", function() {
+            var selectedTank = tankSelect.options[tankSelect.selectedIndex];
+            var stokMax = selectedTank.getAttribute("data-stok-max");
+            kapasitasInput.setAttribute("max", stokMax);
+        });
+    });
+</script>

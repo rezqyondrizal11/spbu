@@ -66,31 +66,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-12 col-sm-6">
-                                                        <div class="input-group input-group-static">
-                                                            <label class="">Shift</label>
-                                                            <select class="form-control" id="jam" name="jam"
-                                                                required>
-                                                                <option value="" disabled selected hidden>Select a
-                                                                    shift</option>
-
-                                                                <option value="pagi">
-                                                                    Pagi
-                                                                </option>
-                                                                <option value="siang">
-                                                                    Siang
-                                                                </option>
-                                                                <option value="malam">
-                                                                    Malam
-                                                                </option>
-
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                              
                                                 <div class="button-row d-flex mt-4">
                                                     <button class="btn bg-gradient-primary ms-auto mb-0" type="submit"
                                                         title="Save">Save</button>

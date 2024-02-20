@@ -12,7 +12,7 @@
                                 <h6 class="text-white text-capitalize">@yield('title')</h6>
                                 <a href="{{ route('tankdelivery.create') }}" class="btn btn-success">
                                     Create
-                                </a>
+                                </a>    
                                 {{-- <button class="btn btn-success">Create</button> --}}
                             </div>
                         </div>

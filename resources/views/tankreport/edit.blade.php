@@ -42,7 +42,7 @@
                                                                     Tank Name</option>
                                                                 @foreach ($tank as $t)
                                                                     <option value="{{ $t->id }}"
-                                                                        <?= $data->id_tank == $t->id ? 'selected' : '' ?>>
+                                                                        <?= $data->id_tank == $t->id ? 'selected' : '' ?>  data-stok-max="{{ $t->capacity }}">
                                                                         {{ $t->name }}
                                                                     </option>
                                                                 @endforeach
@@ -86,3 +86,15 @@
 
     </div>
 @endsection
+<script>
+       document.addEventListener("DOMContentLoaded", function() {
+        var tankSelect = document.getElementById("id_tank");
+        var kapasitasInput = document.getElementById("kapasitas_awal");
+
+        tankSelect.addEventListener("change", function() {
+            var selectedTank = tankSelect.options[tankSelect.selectedIndex];
+            var stokMax = selectedTank.getAttribute("data-stok-max");
+            kapasitasInput.setAttribute("max", stokMax);
+        });
+    });
+</script>

@@ -49,7 +49,6 @@
                             by
                             <a href="" class="font-weight-bold" target="_blank">Habib
                             </a>
-                            for a better web.
                         </div>
                     </div>
 

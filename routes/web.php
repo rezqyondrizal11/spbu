@@ -89,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('update', [SalesreportController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [SalesreportController::class, 'destroy'])->name('destroy');
         Route::get('/report', [SalesreportController::class, 'report'])->name('report');
+        Route::get('/print', [SalesreportController::class, 'print'])->name('print');
     });
 
     Route::group(['prefix' => '/tank-delivery', 'as' => 'tankdelivery.'], function () {
@@ -99,6 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('update', [TankdeliveryController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [TankdeliveryController::class, 'destroy'])->name('destroy');
         Route::get('/report', [TankdeliveryController::class, 'report'])->name('report');
+        Route::get('/print', [TankdeliveryController::class, 'print'])->name('print');
 
     });
 });

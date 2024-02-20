@@ -19,13 +19,12 @@
                 <h5 class="card-title">Coverage Day Summary</h5>
                 <div class=" mt-2">
                     <div class="row col-2">
-                        <span class="custom-badge-label text-center" style="background-color:  rgba(255, 99, 132, 0.8);">
-                            CAPACITY</span>
+                        <span class="custom-badge-label text-center" style="background-color:  rgba(255, 0, 10, 0.8);">
+                            Fuel Volume</span>
                     </div>
                     <div class="row col-2">
                         <span class="custom-badge-label text-center"
-                            style="background-color:rgba(54, 162, 235, 0.8);">CURRENT
-                            CAPACITY</span>
+                            style="background-color:rgba(25, 31, 52, 0.6);">Empty Fuel Volume</span>
                     </div>
 
                 </div>
@@ -81,8 +80,8 @@
                     datasets: [{
                         data: [tank.tank.capacity, tank.kapasitas_stok],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(25, 31, 52, 0.6)',
+                            'rgba(255, 0, 10, 0.8)',
                         ],
                         hoverOffset: 4
                     }],

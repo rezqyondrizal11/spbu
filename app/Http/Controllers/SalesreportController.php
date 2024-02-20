@@ -35,11 +35,31 @@ class SalesreportController extends Controller
 
         return view('salesreport.index2', compact('data'));
     }
+    public function print(Request $request)
+    {
+        $query = SalesReport::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
+        $start =  $request->input('start_date');
+        $end =  $request->input('end_date');
+        return view('salesreport.print', compact('data','start','end'));
+    }
     public function create()
     {
         $tank = TankReport::where('created_at', 'like', date('Y-m-d') . '%')->orderBy('id', 'ASC')->get();
+        $shift  = ['pagi','siang','malam' ];
+  
         // $tank = Tank::whereNotIn('id', $tankreport->pluck('id_tank'))->get();
-        return view('salesreport.create', compact('tank'));
+        return view('salesreport.create', compact('tank','shift'));
     }
     public function store(Request $request)
     {
@@ -49,19 +69,59 @@ class SalesreportController extends Controller
             'jam' => 'required',
         ]);
         $input = $request->all();
+        $tank = TankReport::where('id', $input['id_tank_report'])
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        
+        ->first();
+        if ($tank->kapasitas_stok < $input['kapasitas']) {
+
+            return redirect()->route('salesreport.create')
+            ->with('error', 'Kapasitas Melebihi Stok Maksimum');
+        }
         if ($input['jam'] == 'pagi') {
             $input['jam_awal'] = "07:01";
             $input['jam_akhir'] = "14:00";
+
+            $checksales = SalesReport::where('id_tank_report',$tank->id)
+            ->where('created_at', 'like', date('Y-m-d') . '%')
+            ->where('jam_akhir',"14:00:00")
+            ->first();
+
+            if ($checksales) {
+
+                return redirect()->route('salesreport.create')
+                ->with('error', 'Shift Telah Input, Silahkan isi Shift yang lainnya');
+            }
+
         } elseif ($input['jam'] == 'siang') {
             $input['jam_awal'] = "14:01";
             $input['jam_akhir'] = "22:00";
+            $checksales = SalesReport::where('id_tank_report',$tank->id)
+            ->where('created_at', 'like', date('Y-m-d') . '%')
+            ->where('jam_akhir',"22:00:00")
+            ->first();
+
+            if ($checksales) {
+
+                return redirect()->route('salesreport.create')
+                ->with('error', 'Shift Telah Input, Silahkan isi Shift yang lainnya');
+            }
         } elseif ($input['jam'] == 'malam') {
             $input['jam_awal'] = "22:01";
             $input['jam_akhir'] = "07:00";
+            $checksales = SalesReport::where('id_tank_report',$tank->id)
+            ->where('created_at', 'like', date('Y-m-d') . '%')
+            ->where('jam_akhir',"07:00:00")
+            ->first();
+
+            if ($checksales) {
+
+                return redirect()->route('salesreport.create')
+                ->with('error', 'Shift Telah Input, Silahkan isi Shift yang lainnya');
+            }
         }
+ 
 
-
-        $tank = TankReport::where('id', $input['id_tank_report'])->first();
         $revenue = $tank->tank->grade->harga;
         $input['harga'] =  $revenue;
 
@@ -91,24 +151,26 @@ class SalesreportController extends Controller
         $this->validate($request, [
             'id_tank_report' => 'required',
             'kapasitas' => 'required',
-            'jam' => 'required',
+          
         ]);
 
         $input = $request->all();
-        if ($input['jam'] == 'pagi') {
-            $input['jam_awal'] = "07:01";
-            $input['jam_akhir'] = "14:00";
-        } elseif ($input['jam'] == 'siang') {
-            $input['jam_awal'] = "14:01";
-            $input['jam_akhir'] = "22:00";
-        } elseif ($input['jam'] == 'malam') {
-            $input['jam_awal'] = "22:01";
-            $input['jam_akhir'] = "07:00";
+        $tank1 = TankReport::where('id', $input['id_tank_report'])
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        
+        ->first();
+        $tank1->kapasitas_stok =  $tank1->kapasitas_stok + $input['kapasitas_awal'];
+        if ($tank1->kapasitas_stok < $input['kapasitas']) {
+
+            return redirect()->route('salesreport.create')
+            ->with('error', 'Kapasitas Melebihi Stok Maksimum');
         }
+     
         $input = $request->all();
         $data = SalesReport::find($request->id);
         $data->update($input);
-        $tank = TankReport::where('id', $input['id_tank_report'])->first();
+        $tank = TankReport::where('id', $input['id_tank_report'])
+       ->where('created_at', 'like', date('Y-m-d') . '%')->first();
         $tank->kapasitas_stok =  $tank->kapasitas_stok + $input['kapasitas_awal'] -  $input['kapasitas'];
         $tank->save();
         return redirect()->route('salesreport.index')
