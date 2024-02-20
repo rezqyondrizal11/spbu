@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}/', [TankreportController::class, 'edit'])->name('edit');
         Route::put('update', [TankreportController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [TankreportController::class, 'destroy'])->name('destroy');
+        Route::get('/print', [TankreportController::class, 'print'])->name('print');
     });
     Route::group(['prefix' => '/sales-report', 'as' => 'salesreport.'], function () {
         Route::get('/', [SalesreportController::class, 'index'])->name('index');
@@ -101,6 +102,5 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/destroy/{id}', [TankdeliveryController::class, 'destroy'])->name('destroy');
         Route::get('/report', [TankdeliveryController::class, 'report'])->name('report');
         Route::get('/print', [TankdeliveryController::class, 'print'])->name('print');
-
     });
 });

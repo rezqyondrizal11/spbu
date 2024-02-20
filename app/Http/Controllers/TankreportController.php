@@ -92,4 +92,22 @@ class TankreportController extends Controller
         return redirect()->route('tankreport.index')
             ->with('success', ' tank deleted successfully');
     }
+    public function print(Request $request)
+    {
+        $query = TankReport::orderBy('id', 'DESC');
+
+        // Tambahkan logika untuk pencarian berdasarkan tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $data = $query->get();
+        $start =  $request->input('start_date');
+        $end =  $request->input('end_date');
+        return view('tankreport.print', compact('data', 'start', 'end'));
+    }
 }
