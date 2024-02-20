@@ -61,9 +61,9 @@ class TankdeliveryController extends Controller
         $supplier = Supplier::get();
         $supply    = Supply::get();
         $tanks = TankReport::where('created_at', 'like', date('Y-m-d') . '%')
-        ->get();
-     
-        return view('Tankdelivery.create', compact('tank', 'supplier', 'supply','tanks'));
+            ->get();
+
+        return view('Tankdelivery.create', compact('tank', 'supplier', 'supply', 'tanks'));
     }
 
     public function store(Request $request)
@@ -83,20 +83,20 @@ class TankdeliveryController extends Controller
         $tank = Tank::where('id', $input['id_tank'])->first();
 
         $tankreport = TankReport::where('id_tank', $tank->id)
-        ->where('created_at', 'like', date('Y-m-d') . '%')
-        ->first();
+            ->where('created_at', 'like', date('Y-m-d'))
+            ->first();
         $checkstok =  $input['do_volume'] +  $tankreport->kapasitas_stok;
         if ($checkstok  >   $tankreport->kapasitas_awal) {
 
             return redirect()->route('tankdelivery.create')
-            ->with('error', 'Melebihi Kapasitas Maximum Tank');
+                ->with('error', 'Melebihi Kapasitas Maximum Tank');
         }
 
         $input['created_by'] = Auth::user()->id;
         $data = Tankdelivery::create($input);
 
 
-      
+
         $tankreport->kapasitas_stok =  $tankreport->kapasitas_stok + $data->do_volume;
         $tankreport->save();
 
@@ -113,9 +113,9 @@ class TankdeliveryController extends Controller
         $supply    = Supply::get();
         $data = Tankdelivery::find($id);
         $tanks = TankReport::where('created_at', 'like', date('Y-m-d') . '%')
-        ->get();
-     
-        return view('Tankdelivery.edit', compact('data', 'tank', 'supplier', 'supply','tanks'));
+            ->get();
+
+        return view('Tankdelivery.edit', compact('data', 'tank', 'supplier', 'supply', 'tanks'));
     }
 
 
