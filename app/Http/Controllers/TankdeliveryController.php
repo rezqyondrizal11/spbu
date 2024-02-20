@@ -83,11 +83,11 @@ class TankdeliveryController extends Controller
         $tank = Tank::where('id', $input['id_tank'])->first();
 
         $tankreport = TankReport::where('id_tank', $tank->id)
-            ->where('created_at', 'like', date('Y-m-d'))
+            ->whereDate('created_at', now()->toDateString())
             ->first();
-        $checkstok =  $input['do_volume'] +  $tankreport->kapasitas_stok;
-        if ($checkstok  >   $tankreport->kapasitas_awal) {
 
+        $checkstok =  $input['do_volume'] +  $tankreport->kapasitas_stok;
+        if ($checkstok  >   $tank->capacity) {
             return redirect()->route('tankdelivery.create')
                 ->with('error', 'Melebihi Kapasitas Maximum Tank');
         }

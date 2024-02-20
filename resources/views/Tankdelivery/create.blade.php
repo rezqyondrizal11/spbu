@@ -2,7 +2,7 @@
 
 @section('title', 'Tank Order Delivery')
 @section('content')
-<style>
+    <style>
         /* Gaya CSS untuk custom-badge-label */
         .custom-badge-label {
             display: inline-block;
@@ -23,8 +23,8 @@
                             Fuel Volume</span>
                     </div>
                     <div class="row col-2">
-                        <span class="custom-badge-label text-center"
-                            style="background-color:rgba(25, 31, 52, 0.6);">Empty Fuel Volume</span>
+                        <span class="custom-badge-label text-center" style="background-color:rgba(25, 31, 52, 0.6);">Empty
+                            Fuel Volume</span>
                     </div>
 
                 </div>
@@ -78,14 +78,16 @@
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: [tank.tank.capacity, tank.kapasitas_stok],
+                        data: [persentaseStok, persentaseCapacity],
                         backgroundColor: [
                             'rgba(25, 31, 52, 0.6)',
                             'rgba(255, 0, 10, 0.8)',
                         ],
                         hoverOffset: 4
                     }],
-                    labels: [persentase.toFixed(2) + '%', persentaseCapacity.toFixed(2) + '%']
+                    labels: ['Stok: ' + persentase.toFixed(2) + '%', 'Sisa Kapasitas: ' + persentaseCapacity
+                        .toFixed(2) + '%'
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -98,11 +100,6 @@
                             display: true,
                             text: formattedStok + 'L / ' + formattedCapacity + 'L'
                         },
-                        // subtitle: {
-                        //     display: true,
-                        //     text: 'Liters'
-                        // },
-
                     }
                 }
             };
@@ -134,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                @if(session('error'))
+                                    @if (session('error'))
                                         <div class="alert alert-danger text-white">
                                             {{ session('error') }}
                                         </div>

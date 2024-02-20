@@ -51,6 +51,7 @@ class TankreportController extends Controller
 
         $input = $request->all();
         $input['kapasitas_stok'] = $input['kapasitas_awal'];
+
         $input['created_by'] = Auth::user()->id;
         $data = TankReport::create($input);
 
