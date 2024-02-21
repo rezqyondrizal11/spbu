@@ -18,10 +18,11 @@
                     <div class="card-body px-0 pb-2">
                         <div class="row p-0  position-relative mt-n4 mx-3 z-index-2 pt-6 ">
                             <div class="col-3">
-               
-                            <a href="{{ route('salesreport.print') }}"  class="btn btn-success" >
-                                Print
-                            </a>
+
+                                <a href="{{ route('salesreport.print', ['start' => $start, 'end' => $end, 'id_tank' => $id_tank]) }}"
+                                    class="btn btn-success">
+                                    Print
+                                </a>
                             </div>
                             <div class="col-md-9 ">
                                 <form action="{{ route('salesreport.report') }}" method="GET" class="mb-4">
@@ -29,16 +30,32 @@
                                         <div class="col-5">
                                             <div class="form-group">
                                                 <label for="start_date">Start Date:</label>
-                                                <input type="date" class="form-control" name="start_date"
-                                                    id="start_date">
+                                                <input type="date" class="form-control" name="start_date" id="start_date"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="col-5">
                                             <div class="form-group">
                                                 <label for="end_date">End Date:</label>
-                                                <input type="date" class="form-control" name="end_date" id="end_date">
+                                                <input type="date" class="form-control" name="end_date" id="end_date"
+                                                    required>
                                             </div>
                                         </div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label class="ms-0">Tank</label>
+                                                <select class="form-control" id="id_tank" name="id_tank" required>
+                                                    <option value="" disabled selected hidden>Select a
+                                                        Tank Name</option>
+                                                    @foreach ($tank as $t)
+                                                        <option value="{{ $t->id }}">
+                                                            {{ $t->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="col-2 d-flex align-items-end">
                                             <button type="submit" class="btn btn-primary">Search</button>
                                         </div>
