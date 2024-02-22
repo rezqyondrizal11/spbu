@@ -51,8 +51,9 @@ class TankdeliveryController extends Controller
         }
 
         $data = $query->get();
-
-        return view('Tankdelivery.print', compact('data'));
+        $start = 0;
+        $end = 0;
+        return view('Tankdelivery.print', compact('data', 'start', 'end'));
     }
     public function create()
     {

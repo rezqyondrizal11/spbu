@@ -1,54 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.print')
+@section('title', 'Report Liters')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak Halaman</title>
-    <style>
-        /* CSS khusus untuk tampilan cetak */
-        @media print {
+@section('content')
+    <div class="row justify-content-center">
 
-            /* Atur gaya yang ingin Anda terapkan saat mencetak */
-            body {
-                font-size: 12pt;
-                margin: 0;
-                padding: 0;
-            }
+        <table class="table table-bordered">
 
-            /* Contoh penyesuaian gaya untuk elemen tertentu */
-            .container {
-                width: 100%;
-                margin: 0;
-                padding: 20px;
-            }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-            }
-
-            th,
-            td {
-                border: 1px solid #000;
-                padding: 8px;
-                text-align: left;
-            }
-
-            th {
-                background-color: #f2f2f2;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Report Liters</h1>
-        <table class="table">
             <thead>
-                <tr>
+
+                <tr style="color: #000000;">
                     <th class=" ">
                         No</th>
 
@@ -67,9 +28,11 @@
                     <th class="">
                         Date
                     </th>
-                    {{-- <th class="text-secondary opacity-7"></th> --}}
+
                 </tr>
+
             </thead>
+
             <tbody>
                 @foreach ($data as $row)
                     <tr>
@@ -89,11 +52,9 @@
 
             </tbody>
         </table>
-        <!-- Tambahkan konten lain yang ingin Anda cetak di sini -->
-    </div>
-</body>
-<script>
-    window.print(); // Memanggil fungsi print bawaan dari browser
-</script>
 
-</html>
+    </div>
+
+
+
+@endsection
